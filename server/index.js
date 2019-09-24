@@ -1,5 +1,5 @@
 const express = require('express');
-const fs = require('fs');
+const symptoms = require('../model/index');
 
 const config = require('../config');
 
@@ -10,26 +10,13 @@ app.set('port', config.port);
 app.use(express.static('public/'));
 app.use(express.static('client/dist'));
 
-const readJSONFile = (filename, callback) => {
-  fs.readFile(filename, (err, data) => {
+app.get('/symptom', (req, res) => {
+  symptoms.selectAll((err, data) => {
     if (err) {
-      callback(err);
-      return;
+      res.sendStatus(500).send(err);
+    } else {
+      res.json(data);
     }
-    try {
-      callback(null, JSON.parse(data));
-    } catch (exception) {
-      callback(exception);
-    }
-  });
-};
-
-app.get('/api', (req, res) => {
-  readJSONFile('symptoms.json', (err, json) => {
-    if (err) {
-      throw err;
-    }
-    res.send(json);
   });
 });
 
