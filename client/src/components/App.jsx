@@ -23,6 +23,10 @@ export default class App extends Component {
       .catch(err => console.error(err));
   };
 
+  startOver = () => {
+    window.location.reload();
+  };
+
   render() {
     const { symptoms } = this.state;
     return (
@@ -30,6 +34,9 @@ export default class App extends Component {
         {symptoms.map(symptom => (
           <div key={symptom.id}>{symptom.name}</div>
         ))}
+        <button type="button" onClick={this.startOver}>
+          START OVER
+        </button>
       </div>
     );
   }
