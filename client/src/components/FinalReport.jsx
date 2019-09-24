@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const FinalReport = ({ symptom, chosenDiagnosis }) => {
   const finalDiagnosis = symptom.diagnosis.filter(item => item.name === chosenDiagnosis);
@@ -6,3 +7,8 @@ const FinalReport = ({ symptom, chosenDiagnosis }) => {
 };
 
 export default FinalReport;
+
+FinalReport.propTypes = {
+  symptom: PropTypes.instanceOf(Object).isRequired,
+  chosenDiagnosis: PropTypes.string.isRequired,
+};

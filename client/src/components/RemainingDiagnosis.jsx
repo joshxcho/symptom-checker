@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const RemainingDiagnosis = ({ symptom }) => (
   <div>
@@ -11,4 +12,7 @@ const RemainingDiagnosis = ({ symptom }) => (
   </div>
 );
 
+RemainingDiagnosis.propTypes = {
+  symptom: PropTypes.instanceOf(Object).isRequired,
+};
 export default RemainingDiagnosis;

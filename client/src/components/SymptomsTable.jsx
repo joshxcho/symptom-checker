@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Symptom from './Symptom';
 import DiagnosisList from './DiagnosisList';
 
-export default class SymptomTable extends Component {
+export default class SymptomsTable extends Component {
   constructor(props) {
     super(props);
 
@@ -48,3 +49,19 @@ export default class SymptomTable extends Component {
     );
   }
 }
+
+SymptomsTable.propTypes = {
+  symptoms: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      diagnosis: PropTypes.arrayOf(
+        PropTypes.shape({
+          diagId: PropTypes.number.isRequired,
+          name: PropTypes.string.isRequired,
+          frequency: PropTypes.number.isRequired,
+        }),
+      ),
+    }),
+  ).isRequired,
+};

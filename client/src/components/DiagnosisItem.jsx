@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
 import FinalReport from './FinalReport';
 import RemainingDiagnosis from './RemainingDiagnosis';
 
@@ -60,3 +61,7 @@ export default class DiagnosisItem extends Component {
     );
   }
 }
+
+DiagnosisItem.propTypes = {
+  symptom: PropTypes.instanceOf(Object).isRequired,
+};
