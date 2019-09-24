@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i');
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 /* Global CSS variables */
 :root {
   --mainColor: rgb(0, 190, 162);
-  --bgColor: rgb(255, 255, 255);
-  --fontColor1: rgb(34, 34, 34);
+  --bgColor: rgb(230, 230, 230);
+  --fontColor1: rgb(255, 255, 255);
   --fontColor2: rgb(55, 54, 74);
   --accentColor1: rgb(28, 57, 221);
   --accentColor2: rgb(88, 128, 244);
-  --mainFont: Helvetica, sans-serif;
+  --mainFont: Roboto, sans-serif;
   --secFont: Source Sans Pro;
 }
 
@@ -24,6 +24,7 @@ html {
 body {
   background: var(--bgColor);
   text-align: center;
+  font-weight: bold;
 }
 
 h1 {
@@ -38,6 +39,56 @@ p {
   border-bottom: 4px solid var(--mainColor);
   padding: 1rem;
   margin-bottom: 0;
+}
+
+.landing-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-btn {
+  width: 200px;
+  height: 40px;
+  border: none;
+  font-size: 14px;
+  background-color: var(--mainColor);
+
+  color: var(--fontColor1);
+}
+
+.symptom-container {
+  display: flex;
+  flex-direction: column;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+
+  width: 350px;
+}
+
+.symptom-container select {
+  height: 30px;
+  width: 240px;
+  font-size: 14px;
+  margin: 30px;
+}
+
+.symptom-container button {
+  height: 40px;
+  width: 240px;
+  border-radius: 3px;
+  font-size: 14px;
+  background-color: var(--mainColor);
+  color: var(--fontColor1);
+}
+
+.symptom-text {
+  margin-bottom: 20px;
 }
 
 /* Extra small devices (phones, 600px and down) */
