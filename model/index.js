@@ -1,37 +1,26 @@
 const mongoose = require('mongoose');
 const Symptom = require('./Symptom');
 
-// TODO: Implement .env variables
-const IP = 'localhost:27017';
-const dbURI = process.env.MONGODB_URI || `mongodb://${IP}/sdc`;
+mongoose.connect('mongodb://localhost:27017/symptom-checker');
 
-// const IP = 'database:27017';
-// const dbURI = process.env.MONGODB_URI || `mongodb://${IP}/bookings`;
+const db = mongoose.connection;
 
-mongoose.connect(dbURI, {
-  useNewUrlParser: true,
+db.on('error', () => {
+  console.log('mongoose connection error');
 });
 
-mongoose.connection.on('connected', () => {
-  console.log(`Mongoose default connection open to ${dbURI}`);
+db.once('open', () => {
+  console.log('mongoose connected successfully');
 });
 
-// If the connection throws an error
-mongoose.connection.on('error', (err) => {
-  console.log(`Mongoose default connection error: ${err}`);
-});
-
-// When the connection is disconnected
-mongoose.connection.on('disconnected', () => {
-  console.log('Mongoose default connection disconnected');
-});
-
-// If the Node process ends, close the Mongoose connection
-process.on('SIGINT', () => {
-  mongoose.connection.close(() => {
-    console.log('Mongoose default connection disconnected through app termination');
-    process.exit(0);
+const selectAll = (callback) => {
+  Symptom.find({}, (err, items) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, items);
+    }
   });
-});
+};
 
-module.exports = { Symptom };
+module.exports.selectAll = selectAll;
