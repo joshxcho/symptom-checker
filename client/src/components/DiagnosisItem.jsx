@@ -35,13 +35,26 @@ export default class DiagnosisItem extends Component {
       return <FinalReport symptom={symptom} selectedDiagnosis={selectedDiagnosis} />;
     }
     if (showRestDiagnosis === true) {
-      return <RemainingDiagnosis symptom={symptom} selectedDiagnosis={selectedDiagnosis} />;
+      return (
+        <RemainingDiagnosis
+          symptom={symptom}
+          selectedDiagnosis={selectedDiagnosis}
+          submit={this.handleConfirm}
+          change={this.handleChange}
+        />
+      );
     }
     return null;
   };
 
   handleDeny = () => {
     this.setState({ showRestDiagnosis: true, isConfirmed: true });
+  };
+
+  handleChange = (e) => {
+    const { value } = e.target;
+
+    this.setState({ selectedDiagnosis: value });
   };
 
   render() {
