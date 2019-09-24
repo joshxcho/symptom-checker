@@ -1,0 +1,49 @@
+[
+  {
+    "id": 0,
+    "name": "sore throat",
+    "diagnosis": [
+      { "diagId": 0, "name": "common cold", "frequency": 0 },
+      { "diagId": 1, "name": "viral throat infection", "frequency": 0 },
+      { "diagId": 2, "name": "middle ear infection", "frequency": 0 },
+      { "diagId": 3, "name": "seasonal allergies", "frequency": 0 },
+      { "diagId": 4, "name": "strep throat", "frequency": 0 },
+      { "diagId": 5, "name": "mononucleosis infection", "frequency": 0 },
+      { "diagId": 6, "name": "bronchitis", "frequency": 0 },
+      { "diagId": 7, "name": "acid reflux disease", "frequency": 0 },
+      { "diagId": 8, "name": "acute bacterial sinusitis", "frequency": 0 }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "itchy rash",
+    "diagnosis": [
+      { "diagId": 0, "name": "sunburn", "frequency": 0 },
+      { "diagId": 1, "name": "irritant contact dermatitis", "frequency": 0 },
+      { "diagId": 2, "name": "non-specific dermatitis (skin inflammation)", "frequency": 0 },
+      { "diagId": 3, "name": "hives", "frequency": 0 },
+      { "diagId": 4, "name": "benign skin growth", "frequency": 0 },
+      { "diagId": 5, "name": "allergic reaction to poison ivy/oak/sumac", "frequency": 0 },
+      { "diagId": 6, "name": "chronic hepatitis c", "frequency": 0 },
+      { "diagId": 7, "name": "shingles (herpes zoster)", "frequency": 0 },
+      { "diagId": 8, "name": "perianal skin infection", "frequency": 0 },
+      { "diagId": 9, "name": "seborrheic dermatitis", "frequency": 0 }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "runny nose",
+    "diagnosis": [
+      { "diagId": 0, "name": "common cold", "frequency": 0 },
+      { "diagId": 1, "name": "chronic sinusitis", "frequency": 0 },
+      { "diagId": 2, "name": "non-allergic rhinitis", "frequency": 0 },
+      { "diagId": 3, "name": "chronic allergies", "frequency": 0 },
+      { "diagId": 4, "name": "normal congestion and runny nose", "frequency": 0 },
+      { "diagId": 5, "name": "mononucleosis infection", "frequency": 0 },
+      { "diagId": 6, "name": "viral infection of the larynx (voice box)", "frequency": 0 },
+      { "diagId": 7, "name": "chronic bronchitis", "frequency": 0 },
+      { "diagId": 8, "name": "hand-foot-and-mouth disease", "frequency": 0 },
+      { "diagId": 9, "name": "bronchiectasis", "frequency": 0 }
+    ]
+  }
+]
