@@ -17,7 +17,7 @@ export default class App extends Component {
 
   getSymptoms = () => {
     axios
-      .get('/api')
+      .get('/symptom')
       .then(res => this.setState({
         symptoms: res.data,
       }))
