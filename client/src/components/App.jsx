@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import SymptomsTable from './SymptomsTable';
 
 export default class App extends Component {
   constructor(props) {
@@ -31,12 +32,10 @@ export default class App extends Component {
     const { symptoms } = this.state;
     return (
       <div className="landing-page">
-        {symptoms.map(symptom => (
-          <div key={symptom.id}>{symptom.name}</div>
-        ))}
-        <button type="button" onClick={this.startOver}>
+        <button className="main-btn" type="button" onClick={this.startOver}>
           START OVER
         </button>
+        <SymptomsTable symptoms={symptoms} submit={this.submitSymptoms} />
       </div>
     );
   }
