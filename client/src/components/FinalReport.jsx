@@ -6,7 +6,7 @@ const FinalReport = ({ symptom, selectedDiagnosis }) => {
   return (
     <div className="final-report-text">
       {finalDiagnosis.length > 0
-        ? `There are currently ${finalDiagnosis[0].frequency} case of ${finalDiagnosis[0].name}`
+        ? `Thank you for your submission! There are currently ${finalDiagnosis[0].frequency} reported case of ${finalDiagnosis[0].name}`
         : null}
     </div>
   );
