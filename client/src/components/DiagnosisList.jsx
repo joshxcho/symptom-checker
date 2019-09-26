@@ -7,7 +7,7 @@ const DiagnosisList = ({ symptom, chosenSymptom }) => (
   <div className="diagnosis-container">
     {chosenSymptom === symptom.name && (
       <React.Fragment>
-        <DiagnosisItem symptom={symptom} />
+        <DiagnosisItem symptom={symptom} chosenSymptom={chosenSymptom} />
       </React.Fragment>
     )}
   </div>
