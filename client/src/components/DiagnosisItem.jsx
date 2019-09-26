@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import axios from 'axios';
+
 import PropTypes from 'prop-types';
 import FinalReport from './FinalReport';
 import RemainingDiagnosis from './RemainingDiagnosis';
@@ -13,33 +15,61 @@ export default class DiagnosisItem extends Component {
       showRestDiagnosis: false,
       isConfirmed: false,
       selectedDiagnosis: '',
+      frequency: 0,
+      remainingDiagnosisList: [],
     };
+  }
+
+  componentDidMount() {
+    this.recommendDiagnosis();
   }
 
   recommendDiagnosis = () => {
     const { symptom } = this.props;
 
     const max = symptom.diagnosis.reduce((prev, current) => (prev.frequency > current.frequency ? prev : current));
-
-    return max ? <div>{`You are likely suffering from ${max.name}. Is this correct?`}</div> : null;
+    this.setState({
+      selectedDiagnosis: max.name,
+    });
   };
 
-  handleConfirm = () => {
-    this.setState({ showFinalReport: true, isConfirmed: true });
+  updateFrequency = () => {
+    const { chosenSymptom } = this.props;
+    const { selectedDiagnosis, frequency } = this.state;
+    axios
+      .put('/symptom', {
+        name: chosenSymptom,
+        diagnosis: { name: selectedDiagnosis, frequency: frequency + 1 },
+      })
+      .then(() => window.location.reload())
+      .catch(err => console.error(err));
+  };
+
+  handleFinalSubmit = () => {
+    this.setState({
+      showFinalReport: true,
+      isConfirmed: true,
+    });
   };
 
   renderOption = () => {
     const { symptom } = this.props;
-    const { showFinalReport, showRestDiagnosis, selectedDiagnosis } = this.state;
-    if (showFinalReport === true) {
+    const {
+      showFinalReport,
+      showRestDiagnosis,
+      selectedDiagnosis,
+      remainingDiagnosisList,
+    } = this.state;
+
+    if (showFinalReport) {
       return <FinalReport symptom={symptom} selectedDiagnosis={selectedDiagnosis} />;
     }
-    if (showRestDiagnosis === true) {
+    if (showRestDiagnosis) {
       return (
         <RemainingDiagnosis
-          symptom={symptom}
+          remainingDiagnosisList={remainingDiagnosisList}
           selectedDiagnosis={selectedDiagnosis}
-          submit={this.handleConfirm}
+          submit={this.updateFrequency}
           change={this.handleChange}
         />
       );
@@ -48,7 +78,16 @@ export default class DiagnosisItem extends Component {
   };
 
   handleDeny = () => {
-    this.setState({ showRestDiagnosis: true, isConfirmed: true });
+    const { symptom } = this.props;
+    const { selectedDiagnosis } = this.state;
+    const remainingDiagnosisList = symptom.diagnosis.filter(
+      item => item.name !== selectedDiagnosis,
+    );
+    this.setState({
+      showRestDiagnosis: true,
+      isConfirmed: true,
+      remainingDiagnosisList,
+    });
   };
 
   handleChange = (e) => {
@@ -58,11 +97,11 @@ export default class DiagnosisItem extends Component {
   };
 
   render() {
-    const { isConfirmed } = this.state;
+    const { isConfirmed, selectedDiagnosis } = this.state;
     return isConfirmed === false ? (
       <div>
-        {this.recommendDiagnosis()}
-        <button type="button" onClick={this.handleConfirm}>
+        <div>{`You are likely suffering from ${selectedDiagnosis}. Is this correct?`}</div>
+        <button type="button" onClick={this.handleFinalSubmit}>
           YES
         </button>
         <button type="button" onClick={this.handleDeny}>
@@ -77,4 +116,5 @@ export default class DiagnosisItem extends Component {
 
 DiagnosisItem.propTypes = {
   symptom: PropTypes.instanceOf(Object).isRequired,
+  chosenSymptom: PropTypes.string.isRequired,
 };
