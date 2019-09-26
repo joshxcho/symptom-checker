@@ -13,9 +13,8 @@ export default class DiagnosisItem extends Component {
     this.state = {
       showFinalReport: false,
       showRestDiagnosis: false,
-      isConfirmed: false,
+      isCompleted: false,
       selectedDiagnosis: '',
-      frequency: 0,
       remainingDiagnosisList: [],
     };
   }
@@ -35,20 +34,21 @@ export default class DiagnosisItem extends Component {
 
   updateFrequency = () => {
     const { chosenSymptom } = this.props;
-    const { selectedDiagnosis, frequency } = this.state;
+    const { selectedDiagnosis } = this.state;
+
     axios
       .put('/symptom', {
         name: chosenSymptom,
-        diagnosis: { name: selectedDiagnosis, frequency: frequency + 1 },
+        diagnosis: { name: selectedDiagnosis },
       })
-      .then(() => window.location.reload())
+      .then(this.handleFinalSubmit())
       .catch(err => console.error(err));
   };
 
   handleFinalSubmit = () => {
     this.setState({
       showFinalReport: true,
-      isConfirmed: true,
+      isCompleted: true,
     });
   };
 
@@ -68,9 +68,11 @@ export default class DiagnosisItem extends Component {
       return (
         <RemainingDiagnosis
           remainingDiagnosisList={remainingDiagnosisList}
-          selectedDiagnosis={selectedDiagnosis}
           submit={this.updateFrequency}
+          showFinalReport={showFinalReport}
           change={this.handleChange}
+          symptom={symptom}
+          selectedDiagnosis={selectedDiagnosis}
         />
       );
     }
@@ -85,7 +87,7 @@ export default class DiagnosisItem extends Component {
     );
     this.setState({
       showRestDiagnosis: true,
-      isConfirmed: true,
+      isCompleted: true,
       remainingDiagnosisList,
     });
   };
@@ -97,8 +99,8 @@ export default class DiagnosisItem extends Component {
   };
 
   render() {
-    const { isConfirmed, selectedDiagnosis } = this.state;
-    return isConfirmed === false ? (
+    const { isCompleted, selectedDiagnosis } = this.state;
+    return !isCompleted ? (
       <div>
         <div>{`You are likely suffering from ${selectedDiagnosis}. Is this correct?`}</div>
         <button type="button" onClick={this.handleFinalSubmit}>
