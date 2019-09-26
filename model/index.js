@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Symptom = require('./Symptom');
 
-mongoose.connect('mongodb://localhost:27017/symptom-checker');
+mongoose.connect('mongodb://localhost:27017/symptoms');
 
 const db = mongoose.connection;
 
@@ -23,4 +23,4 @@ const selectAll = (callback) => {
   });
 };
 
-module.exports.selectAll = selectAll;
+module.exports = { selectAll };
