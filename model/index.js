@@ -23,4 +23,8 @@ const selectAll = (callback) => {
   });
 };
 
-module.exports = { selectAll };
+const updateFrequency = (filter, replacement) => {
+  Symptom.updateOne(filter, replacement);
+};
+
+module.exports = { selectAll, updateFrequency };
