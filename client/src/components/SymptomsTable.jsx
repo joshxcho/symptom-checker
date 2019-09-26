@@ -36,7 +36,7 @@ export default class SymptomsTable extends Component {
             <Symptom key={symptom.id} symptom={symptom} value={symptom.name} />
           ))}
         </select>
-        <button onClick={this.submitSymptom} type="button">
+        <button type="button" onClick={this.submitSymptom} disabled={!chosenSymptom}>
           SUBMIT
         </button>
       </div>
